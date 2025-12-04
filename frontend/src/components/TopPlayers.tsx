@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { API_URL, WS_URL } from "../config";
+
 
 export default function TopPlayers() {
   const [players, setPlayers] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:8000/users/top10")
+    fetch(`${API_URL}/users/top10`)
       .then((res) => res.json())
       .then((data) => setPlayers(data))
       .catch((err) => console.error("Failed loading top players:", err));

@@ -4,7 +4,6 @@ import { python } from "@codemirror/lang-python";
 import { javascript } from "@codemirror/lang-javascript";
 import { cpp } from "@codemirror/lang-cpp";
 import { java } from "@codemirror/lang-java";
-// טיפוס לטסט יחיד
 interface TestCase {
   input: string;
   expected_output: string;
@@ -18,15 +17,13 @@ export default function AddProblem() {
   const [bugCode, setBugCode] = useState<string>("");
   const [fixedCode, setFixedCode] = useState<string>("");
 
-  // טסטים (עם טיפוס מלא)
   const [tests, setTests] = useState<TestCase[]>([
     { input: "", expected_output: "" },
   ]);
 
   const token = localStorage.getItem("token");
-  const API = "http://localhost:8000";
+  const API = import.meta.env.VITE_API_URL;
 
-  // פונקציה שמחזירה את ה־extension ל-CodeMirror
   function getLanguageExtension(lang: string) {
     switch (lang) {
       case "python":
@@ -45,17 +42,14 @@ export default function AddProblem() {
     }
   }
 
-  // הוספת טסט חדש
   const addTest = () => {
     setTests([...tests, { input: "", expected_output: "" }]);
   };
 
-  // מחיקת טסט
   const removeTest = (index: number) => {
     setTests(tests.filter((_, i) => i !== index));
   };
 
-  // עדכון טסט קיים
   const updateTest = (index: number, field: keyof TestCase, value: string) => {
     const updated = [...tests];
     updated[index][field] = value;
@@ -85,7 +79,6 @@ export default function AddProblem() {
     const data = await res.json();
     alert(data.msg || "Problem added!");
 
-    // איפוס
     setTitle("");
     setBugCode("");
     setFixedCode("");

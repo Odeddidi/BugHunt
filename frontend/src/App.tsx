@@ -1,10 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState , useEffect} from "react";
-import WelcomePage from "./pages/Welcome";
 import Home from "./pages/Home";
 import SinglePlayer from "./pages/SinglePlayer";
 import Navbar from "./components/NavBAR";
-import MultiPlayerLobby from "./pages/MultiplayerLobby";
+import MultiPlayerLobby from "./pages/MultiplayerLobby";  
 import Room from "./pages/Room";
 import Profile from "./pages/Profile";
 import AdminPanel from "./pages/AdminPanel";

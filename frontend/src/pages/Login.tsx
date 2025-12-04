@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { API_URL, WS_URL } from "../config";
+import { API_URL } from "../config";
 
 
 export default function Login({setIsLogged}: {setIsLogged: (val: boolean) => void}) {
