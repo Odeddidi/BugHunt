@@ -263,31 +263,37 @@ export default function Room() {
       <main className="max-w-6xl mx-auto px-4 py-10">
 
       {/* HEADER */}
-      <div className="flex items-center justify-between mb-8">
-        <div>
-          <h1 className="text-3xl font-extrabold tracking-wide drop-shadow">
+      <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div className="min-w-0 flex-1">
+          <h1 className="text-3xl font-extrabold tracking-wide drop-shadow break-words">
             {problem.title}
           </h1>
-          <p className="text-gray-300 mt-1">{problem.description}</p>
+          <div className="mt-1 max-h-28 overflow-auto pr-2">
+            <p className="text-gray-300 whitespace-pre-wrap break-words">
+              {problem.description}
+            </p>
+          </div>
         </div>
 
-        {/* SCOREBOARD */}
-        <div className="flex gap-6 text-xl font-bold">
-          <span className="px-4 py-2 rounded-lg bg-white/10 backdrop-blur shadow-md">
-            {username}: <span className="text-green-400">{scores.me}</span>
-          </span>
-          <span className="px-4 py-2 rounded-lg bg-white/10 backdrop-blur shadow-md">
-            {opponent}: <span className="text-red-400">{scores.opponent}</span>
-          </span>
-        </div>
+        <div className="flex flex-col gap-3 lg:items-end">
+          {/* SCOREBOARD */}
+          <div className="flex flex-col sm:flex-row gap-3 text-xl font-bold">
+            <span className="px-4 py-2 rounded-lg bg-white/10 backdrop-blur shadow-md">
+              {username}: <span className="text-green-400">{scores.me}</span>
+            </span>
+            <span className="px-4 py-2 rounded-lg bg-white/10 backdrop-blur shadow-md">
+              {opponent}: <span className="text-red-400">{scores.opponent}</span>
+            </span>
+          </div>
 
-        {/* LEAVE BUTTON */}
-        <button
-          onClick={leaveGame}
-          className="px-4 py-2 bg-red-600 hover:bg-red-700 transition rounded-lg shadow-lg"
-        >
-          Leave
-        </button>
+          {/* LEAVE BUTTON */}
+          <button
+            onClick={leaveGame}
+            className="px-4 py-2 bg-red-600 hover:bg-red-700 transition rounded-lg shadow-lg"
+          >
+            Leave
+          </button>
+        </div>
       </div>
 
       {/* CODE SECTION */}
