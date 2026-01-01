@@ -12,13 +12,13 @@ export default function Home() {
 
       {/* TITLE */}
       <h1 className="text-5xl font-extrabold mb-2 text-center leading-tight drop-shadow-lg">
-        Welcome back, <span className="text-blue-400">{username}</span>!
+        Welcome to BugHunt!
       </h1>
 
       <p className="text-xl text-gray-300 mb-10 text-center max-w-2xl">
         Ready to debug, compete, and win?  
         <br />
-        <span className="text-blue-300 font-semibold">Your Score: {score}</span>
+        <span className="text-blue-300 font-semibold">{username} | Your Score: {score}</span>
       </p>
 
       {/* BUTTONS */}

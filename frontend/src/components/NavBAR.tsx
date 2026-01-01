@@ -28,7 +28,7 @@ export default function NavBar() {
 
   function handleLogout() {
     localStorage.clear();
-    window.location.href = "/login";
+    window.location.href = "/";
   }
 
  return (

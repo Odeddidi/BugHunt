@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route , Navigate} from "react-router-dom";
 import { useState , useEffect} from "react";
 import Home from "./pages/Home";
 import SinglePlayer from "./pages/SinglePlayer";
@@ -12,6 +12,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 export default function App() {
 const [isLogged, setIsLogged] = useState(!!localStorage.getItem("token"));
+const hasToken = !!localStorage.getItem("token");
 useEffect(() => {
     const handler = () => {
       setIsLogged(!!localStorage.getItem("token"));
@@ -27,7 +28,7 @@ useEffect(() => {
 
       {!isLogged ? (
         <Routes>
-          <Route path="/" element={<Hero />} />
+          <Route path="/" element={hasToken ? <Navigate to="/home" /> : <Hero />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login setIsLogged={setIsLogged} />} />
         </Routes>
