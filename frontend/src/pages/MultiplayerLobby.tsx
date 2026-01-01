@@ -57,59 +57,57 @@ export default function MultiplayerLobby() {
   }
 
   return (
-  <div className="min-h-screen w-full bg-gradient-to-br from-gray-900 to-gray-800 
-                  flex items-center justify-center text-white px-4">
+    <div className="min-h-screen text-white">
+      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-gray-950 via-gray-900 to-slate-900" />
+      <div className="fixed inset-0 -z-10 opacity-60">
+        <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+        <div className="absolute top-24 -right-24 h-80 w-80 rounded-full bg-purple-500/20 blur-3xl" />
+        <div className="absolute bottom-[-6rem] left-1/3 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
+      </div>
 
-    {/* CARD */}
-    <div className="bg-gray-800/60 backdrop-blur-xl p-10 w-[420px] rounded-2xl 
-                    shadow-2xl border border-white/10">
+      <main className="max-w-6xl mx-auto px-4 py-12 flex items-center justify-center">
+        <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl shadow-black/30">
+          <h1 className="text-3xl font-bold text-center">Multiplayer Lobby</h1>
+          <p className="mt-2 text-center text-gray-300">Find a match or join with an invite code.</p>
 
-      <h1 className="text-3xl font-bold text-center mb-8">
-        Multiplayer Lobby
-      </h1>
+          <div className="mt-8 space-y-4">
+            <button
+              onClick={findMatch}
+              disabled={loading}
+              className="w-full py-3 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-semibold hover:opacity-90 transition shadow-lg shadow-cyan-500/20"
+            >
+              🔍 Find Match
+            </button>
 
-      {/* FIND MATCH */}
-      <button
-        onClick={findMatch}
-        disabled={loading}
-        className="w-full py-3 mb-5 rounded-lg bg-blue-500 text-white font-semibold 
-                   shadow-[0_0_15px_#3b82f6] hover:bg-blue-600 transition"
-      >
-        🔍 Find Match
-      </button>
+            <button
+              onClick={createPrivateRoom}
+              disabled={loading}
+              className="w-full py-3 rounded-2xl bg-white/10 border border-white/15 text-white font-semibold hover:bg-white/15 transition"
+            >
+              🎮 Create Private Room
+            </button>
+          </div>
 
-      {/* CREATE PRIVATE ROOM */}
-      <button
-        onClick={createPrivateRoom}
-        disabled={loading}
-        className="w-full py-3 mb-6 rounded-lg bg-purple-500 text-white font-semibold 
-                   shadow-[0_0_15px_#a855f7] hover:bg-purple-600 transition"
-      >
-        🎮 Create Private Room
-      </button>
+          <div className="mt-8">
+            <label className="text-sm text-gray-200">Invite Code</label>
+            <input
+              type="text"
+              value={inviteCode}
+              onChange={(e) => setInviteCode(e.target.value)}
+              className="mt-2 w-full p-3 rounded-2xl bg-white/10 text-white border border-white/20 focus:border-cyan-400 outline-none"
+              placeholder="Enter invite code"
+            />
 
-      <label className="text-white text-sm">Invite Code</label>
-
-      <input
-        type="text"
-        value={inviteCode}
-        onChange={(e) => setInviteCode(e.target.value)}
-        className="w-full p-3 rounded-lg bg-white/10 text-white border 
-                   border-white/20 mb-4 focus:border-blue-400 outline-none"
-        placeholder="Enter invite code"
-      />
-
-      {/* JOIN */}
-      <button
-        onClick={joinWithInvite}
-        disabled={loading}
-        className="w-full py-3 rounded-lg bg-green-500 text-white font-bold
-                   shadow-[0_0_15px_#4ade80] hover:bg-green-600 transition"
-      >
-        ➕ Join with Invite
-      </button>
-
+            <button
+              onClick={joinWithInvite}
+              disabled={loading}
+              className="mt-4 w-full py-3 rounded-2xl bg-green-500/90 text-white font-bold hover:bg-green-500 transition shadow-lg shadow-green-500/20"
+            >
+              ➕ Join with Invite
+            </button>
+          </div>
+        </div>
+      </main>
     </div>
-  </div>
 );
 }

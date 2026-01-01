@@ -209,32 +209,58 @@ export default function Room() {
   
   if (!wsConnected)
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <h1 className="text-4xl font-bold text-gray-700 animate-pulse">
-          Connecting…
-        </h1>
+      <div className="min-h-screen text-white">
+        <div className="fixed inset-0 -z-10 bg-gradient-to-br from-gray-950 via-gray-900 to-slate-900" />
+        <div className="fixed inset-0 -z-10 opacity-60">
+          <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+          <div className="absolute top-24 -right-24 h-80 w-80 rounded-full bg-purple-500/20 blur-3xl" />
+          <div className="absolute bottom-[-6rem] left-1/3 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
+        </div>
+        <main className="max-w-6xl mx-auto px-4 py-12 flex items-center justify-center">
+          <h1 className="text-4xl font-bold animate-pulse">Connecting…</h1>
+        </main>
       </div>
     );
 
   if (!opponent)
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <h1 className="text-4xl font-bold text-gray-700 animate-pulse">
-          Waiting for opponent…
-        </h1>
+      <div className="min-h-screen text-white">
+        <div className="fixed inset-0 -z-10 bg-gradient-to-br from-gray-950 via-gray-900 to-slate-900" />
+        <div className="fixed inset-0 -z-10 opacity-60">
+          <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+          <div className="absolute top-24 -right-24 h-80 w-80 rounded-full bg-purple-500/20 blur-3xl" />
+          <div className="absolute bottom-[-6rem] left-1/3 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
+        </div>
+        <main className="max-w-6xl mx-auto px-4 py-12 flex items-center justify-center">
+          <h1 className="text-4xl font-bold animate-pulse">Waiting for opponent…</h1>
+        </main>
       </div>
     );
 
   if (!problem)
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <h1 className="text-4xl font-bold text-gray-700 animate-pulse">
-          Loading problem…
-        </h1>
+      <div className="min-h-screen text-white">
+        <div className="fixed inset-0 -z-10 bg-gradient-to-br from-gray-950 via-gray-900 to-slate-900" />
+        <div className="fixed inset-0 -z-10 opacity-60">
+          <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+          <div className="absolute top-24 -right-24 h-80 w-80 rounded-full bg-purple-500/20 blur-3xl" />
+          <div className="absolute bottom-[-6rem] left-1/3 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
+        </div>
+        <main className="max-w-6xl mx-auto px-4 py-12 flex items-center justify-center">
+          <h1 className="text-4xl font-bold animate-pulse">Loading problem…</h1>
+        </main>
       </div>
     );
-    return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 text-white p-10">
+  return (
+    <div className="min-h-screen text-white">
+      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-gray-950 via-gray-900 to-slate-900" />
+      <div className="fixed inset-0 -z-10 opacity-60">
+        <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+        <div className="absolute top-24 -right-24 h-80 w-80 rounded-full bg-purple-500/20 blur-3xl" />
+        <div className="absolute bottom-[-6rem] left-1/3 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
+      </div>
+
+      <main className="max-w-6xl mx-auto px-4 py-10">
 
       {/* HEADER */}
       <div className="flex items-center justify-between mb-8">
@@ -265,10 +291,10 @@ export default function Room() {
       </div>
 
       {/* CODE SECTION */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
         {/* BUG CODE */}
-        <div className="bg-white/10 backdrop-blur p-5 rounded-xl shadow-xl border border-white/10">
+        <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-5 shadow-xl shadow-black/20">
           <h2 className="text-lg font-bold mb-3">Bugged Code</h2>
           <CodeMirror
             key={`bug-${roundKey}`}
@@ -281,7 +307,7 @@ export default function Room() {
         </div>
 
         {/* USER FIX */}
-        <div className="bg-white/10 backdrop-blur p-5 rounded-xl shadow-xl border border-white/10">
+        <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-5 shadow-xl shadow-black/20">
           <h2 className="text-lg font-bold mb-3">Your Fix</h2>
           <CodeMirror
             key={`fix-${roundKey}`}
@@ -320,7 +346,7 @@ export default function Room() {
 
       {/* CORRECT SOLUTION */}
       {correctSolution && (
-        <div className="mt-10 bg-white/10 backdrop-blur p-5 rounded-xl shadow-xl border border-white/10">
+        <div className="mt-10 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-5 shadow-xl shadow-black/20">
           <h2 className="text-xl font-bold mb-3">⭐ Correct Solution</h2>
           <CodeMirror
             key={`solution-${roundKey}`}
@@ -338,13 +364,13 @@ export default function Room() {
         <div className="flex justify-center mt-8">
           <button
             onClick={requestNextRound}
-            className="px-10 py-3 bg-green-600 rounded-lg font-bold text-lg
-                      shadow-lg hover:bg-green-700 transition"
+            className="px-10 py-3 bg-green-500/90 rounded-2xl font-bold text-lg shadow-lg shadow-green-500/20 hover:bg-green-500 transition"
           >
             Next Round
           </button>
         </div>
       )}
+      </main>
     </div>
   );
 

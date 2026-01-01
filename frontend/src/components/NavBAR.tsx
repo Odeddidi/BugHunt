@@ -19,63 +19,72 @@ export default function NavBar() {
     };
 
     window.addEventListener("storage-score-updated", handleScoreUpdate);
-
-    return () => {
-      window.removeEventListener("storage-score-updated", handleScoreUpdate);
-    };
+    return () => window.removeEventListener("storage-score-updated", handleScoreUpdate);
   }, []);
-
 
   function handleLogout() {
     localStorage.clear();
     window.location.href = "/";
   }
 
- return (
-  <nav className="w-full bg-white shadow-md px-6 py-4 flex justify-between items-center">
+  return (
+    <header className="sticky top-0 z-50">
+      <div className="bg-gray-950/60 backdrop-blur-xl border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+          {/* LEFT */}
+          <div className="flex items-center gap-6">
+            <div className="flex items-center gap-3">
+              <img src="/oded-2.svg" alt="BugHub Logo" className="h-8 w-8" />
+              <span className="text-white font-semibold tracking-wide">BugHunt</span>
+            </div>
 
-    {/* LEFT SIDE — EXACT SAME DESIGN */}
-    <div className="text-lg font-semibold flex items-center">
-      <img src="/oded-2.svg" alt="BugHub Logo" className="h-8 w-8" />
-      
-      <span
-        onClick={() => (window.location.href = "/home")}
-        className="ml-4 cursor-pointer text-gray-700 hover:text-blue-600 transition"
-      >
-        Home
-      </span>
+            <nav className="hidden sm:flex items-center gap-1">
+              <button
+                onClick={() => (window.location.href = "/home")}
+                className="px-3 py-2 rounded-lg text-sm text-gray-200 hover:text-white hover:bg-white/10 transition"
+              >
+                Home
+              </button>
 
-      <span
-        onClick={() => (window.location.href = "/profile")}
-        className="ml-4 cursor-pointer text-gray-700 hover:text-blue-600 transition"
-      >
-        Profile
-      </span>
+              <button
+                onClick={() => (window.location.href = "/profile")}
+                className="px-3 py-2 rounded-lg text-sm text-gray-200 hover:text-white hover:bg-white/10 transition"
+              >
+                Profile
+              </button>
 
-      {isAdmin && (
-        <span
-          onClick={() => (window.location.href = "/admin")}
-          className="ml-4 cursor-pointer text-gray-700 hover:text-blue-600 transition"
-        >
-          Admin Panel
-        </span>
-      )}
-    </div>
+              {isAdmin && (
+                <button
+                  onClick={() => (window.location.href = "/admin")}
+                  className="px-3 py-2 rounded-lg text-sm text-gray-200 hover:text-white hover:bg-white/10 transition"
+                >
+                  Admin
+                </button>
+              )}
+            </nav>
+          </div>
 
-    {/* RIGHT SIDE — SAME STYLE AS BEFORE */}
-    <div className="flex items-center">
-      <span className="text-blue-600">{username}</span>
-      <span className="ml-4 text-gray-700">Score: {score}</span>
+          {/* RIGHT */}
+          <div className="flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-3 px-3 py-2 rounded-xl bg-white/5 border border-white/10">
+              <span className="text-sm text-gray-300">
+                <span className="text-white font-semibold">{username}</span>
+              </span>
+              <span className="h-4 w-px bg-white/10" />
+              <span className="text-sm text-gray-300">
+                Score: <span className="text-white font-semibold">{score}</span>
+              </span>
+            </div>
 
-      <button
-        onClick={handleLogout}
-        className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
-      >
-        Logout
-      </button>
-    </div>
-
-  </nav>
-);
-
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-cyan-400 hover:opacity-90 transition shadow-lg shadow-cyan-500/20"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
 }

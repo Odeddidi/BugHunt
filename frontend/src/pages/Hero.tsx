@@ -2,59 +2,95 @@ import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
-    <div className="relative h-screen w-full overflow-hidden text-white">
-
-      {/* רקע */}
+    <div className="relative min-h-screen w-full overflow-hidden text-white">
+      {/* Background image */}
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-40"
+        className="absolute inset-0 bg-cover bg-center opacity-30"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1518773553398-650c184e0bb3?q=80&w=1200&auto=format')"
+            "url('https://images.unsplash.com/photo-1518773553398-650c184e0bb3?q=80&w=1600&auto=format')",
         }}
       />
 
-      {/* Gradient עליון */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-purple-900/40" />
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-gray-900/80 to-purple-950/40" />
 
-      {/* תוכן */}
-      <div className="relative h-full flex flex-col justify-center px-16">
-        <h1 className="text-6xl font-extrabold mb-4 drop-shadow-xl">
-          DEBUG SHOWDOWN
-        </h1>
-        <p className="text-xl text-gray-300 mb-12">
-          Fix. Compete. Conquer. Real-time coding battles.
-        </p>
+      {/* Glow */}
+      <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+      <div className="absolute top-24 -right-24 h-80 w-80 rounded-full bg-purple-500/20 blur-3xl" />
 
-        <div className="flex gap-4">
-          <Link
-            to="/signup"
-            className="px-8 py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-lg font-semibold shadow-lg shadow-blue-500/50"
-          >
-            SIGN UP
-          </Link>
+      {/* Content */}
+      <div className="relative max-w-6xl mx-auto px-6 pt-24 pb-16">
+        <div className="grid lg:grid-cols-12 gap-10 items-center">
+          <div className="lg:col-span-7">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-gray-200">
+              <span className="h-2 w-2 rounded-full bg-cyan-400" />
+              Real-time debugging arena
+            </div>
 
-          <Link
-            to="/login"
-            className="px-8 py-3 rounded-full bg-purple-500 hover:bg-purple-600 text-lg font-semibold shadow-lg shadow-purple-500/50"
-          >
-            LOG IN
-          </Link>
+            <h1 className="mt-5 text-5xl md:text-6xl font-extrabold tracking-tight">
+              Debug faster.
+              <br />
+              Win smarter.
+            </h1>
+
+            <p className="mt-5 text-lg text-gray-300 max-w-xl leading-relaxed">
+              Fix broken code, race opponents, and climb the leaderboard.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link
+                to="/signup"
+                className="px-7 py-3 rounded-2xl bg-white text-gray-950 font-semibold hover:bg-gray-100 transition shadow-xl shadow-black/30"
+              >
+                Create account
+              </Link>
+
+              <Link
+                to="/login"
+                className="px-7 py-3 rounded-2xl font-semibold text-white bg-white/10 border border-white/15 hover:bg-white/15 transition"
+              >
+                Log in
+              </Link>
+            </div>
+
+            <div className="mt-10 grid sm:grid-cols-3 gap-4">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <div className="text-sm text-gray-300">Mode</div>
+                <div className="mt-1 font-semibold">Single Player</div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <div className="text-sm text-gray-300">Mode</div>
+                <div className="mt-1 font-semibold">Multiplayer</div>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                <div className="text-sm text-gray-300">Goal</div>
+                <div className="mt-1 font-semibold">Leaderboard</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="lg:col-span-5">
+            <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-6 shadow-2xl shadow-black/30">
+              <h2 className="text-xl font-semibold">What you get</h2>
+              <ul className="mt-4 space-y-3 text-gray-300">
+                <li className="flex gap-3">
+                  <span className="text-cyan-300">•</span>
+                  Fast rounds with instant feedback
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-purple-300">•</span>
+                  Competitive pacing without UI clutter
+                </li>
+                <li className="flex gap-3">
+                  <span className="text-blue-300">•</span>
+                  Dark-mode-first visuals designed for code
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* אייקונים (אופציונלי) */}
-      <div className="absolute right-16 top-1/3 flex flex-col gap-10">
-        <div className="text-center">
-          <div className="w-16 h-16 rounded-full border flex items-center justify-center text-2xl">⚔️</div>
-          <p className="mt-2 text-gray-300 text-sm">REAL-TIME ARENA</p>
-        </div>
-
-        <div className="text-center">
-          <div className="w-16 h-16 rounded-full border flex items-center justify-center text-2xl">🧩</div>
-          <p className="mt-2 text-gray-300 text-sm">PRACTICE MODE</p>
-        </div>
-      </div>
-
     </div>
   );
 }

@@ -103,23 +103,32 @@ export default function SinglePlayer() {
   // ----------------------------
   if (!difficulty) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black text-white">
-        <div className="bg-white/10 backdrop-blur-xl p-10 rounded-2xl shadow-xl w-96 border border-white/10 text-center">
-
-          <h2 className="text-3xl font-bold mb-8">Choose Difficulty</h2>
-
-          {["easy", "medium", "hard", "random"].map((diff) => (
-            <button
-              key={diff}
-              onClick={() => setDifficulty(diff)}
-              className="w-full py-3 mb-4 rounded-lg font-semibold 
-                         bg-gradient-to-r from-blue-600 to-purple-600
-                         hover:opacity-90 transition shadow-lg"
-            >
-              {diff.toUpperCase()}
-            </button>
-          ))}
+      <div className="min-h-screen text-white">
+        <div className="fixed inset-0 -z-10 bg-gradient-to-br from-gray-950 via-gray-900 to-slate-900" />
+        <div className="fixed inset-0 -z-10 opacity-60">
+          <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+          <div className="absolute top-24 -right-24 h-80 w-80 rounded-full bg-purple-500/20 blur-3xl" />
+          <div className="absolute bottom-[-6rem] left-1/3 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
         </div>
+
+        <main className="max-w-6xl mx-auto px-4 py-12 flex items-center justify-center">
+          <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl shadow-black/30 text-center">
+            <h2 className="text-3xl font-bold">Choose Difficulty</h2>
+            <p className="mt-2 text-gray-300">Pick a challenge level to start.</p>
+
+            <div className="mt-8 space-y-3">
+              {["easy", "medium", "hard", "random"].map((diff) => (
+                <button
+                  key={diff}
+                  onClick={() => setDifficulty(diff)}
+                  className="w-full py-3 rounded-2xl font-semibold bg-white/10 border border-white/15 hover:bg-white/15 transition"
+                >
+                  {diff.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          </div>
+        </main>
       </div>
     );
   }
@@ -129,8 +138,17 @@ export default function SinglePlayer() {
   // ----------------------------
   if (loadingProblem || !problem) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black text-white">
-        <h1 className="text-3xl font-bold animate-pulse">Loading problem...</h1>
+      <div className="min-h-screen text-white">
+        <div className="fixed inset-0 -z-10 bg-gradient-to-br from-gray-950 via-gray-900 to-slate-900" />
+        <div className="fixed inset-0 -z-10 opacity-60">
+          <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+          <div className="absolute top-24 -right-24 h-80 w-80 rounded-full bg-purple-500/20 blur-3xl" />
+          <div className="absolute bottom-[-6rem] left-1/3 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
+        </div>
+
+        <main className="max-w-6xl mx-auto px-4 py-12 flex items-center justify-center">
+          <h1 className="text-3xl font-bold animate-pulse">Loading problem...</h1>
+        </main>
       </div>
     );
   }
@@ -139,71 +157,68 @@ export default function SinglePlayer() {
   // PAGE 3 — Main Game Screen
   // ----------------------------
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white p-10 flex flex-col items-center">
-
-      <h1 className="text-4xl font-extrabold mb-8 drop-shadow-lg">{problem.title}</h1>
-      <p className="text-gray-300 mb-8 max-w-4xl">{problem.description}</p>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-6xl">
-
-        {/* LEFT — Bugged Code */}
-        <div className="bg-white/10 backdrop-blur-xl p-5 rounded-xl border border-white/10 shadow-xl">
-          <h3 className="text-xl font-bold mb-3">Bugged Code</h3>
-
-          <CodeMirror
-            value={problem.code_with_bug}
-            height="350px"
-            theme="dark"
-            readOnly={true}
-            extensions={[getLanguageExtension(problem.language)]}
-
-          />    
-        </div>
-
-        {/* RIGHT — Your Fix */}
-        <div className="bg-white/10 backdrop-blur-xl p-5 rounded-xl border border-white/10 shadow-xl">
-          <h3 className="text-xl font-bold mb-3">Your Fix</h3>
-
-          <CodeMirror
-            value={userCode}
-            height="350px"
-            theme="dark"
-            extensions={[problem.language === "python" ? python() : javascript()]}
-            onChange={(val) => setUserCode(val)}
-          />
-        </div>
+    <div className="min-h-screen text-white">
+      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-gray-950 via-gray-900 to-slate-900" />
+      <div className="fixed inset-0 -z-10 opacity-60">
+        <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+        <div className="absolute top-24 -right-24 h-80 w-80 rounded-full bg-purple-500/20 blur-3xl" />
+        <div className="absolute bottom-[-6rem] left-1/3 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
       </div>
 
-      {/* Submit */}
-      <button
-        onClick={submitSolution}
-        className="mt-6 px-10 py-3 rounded-lg font-bold bg-blue-600 hover:bg-blue-700 transition shadow-xl"
-      >
-        Submit
-      </button>
+      <main className="max-w-6xl mx-auto px-4 py-10">
+        <header className="mb-8">
+          <h1 className="text-4xl font-extrabold drop-shadow-lg">{problem.title}</h1>
+          <p className="mt-3 text-gray-300 max-w-4xl">{problem.description}</p>
+        </header>
 
-      {/* Feedback */}
-      {feedback && (
-        <p className="mt-4 text-2xl font-semibold">
-          {feedback}
-        </p>
-      )}
-      {runningTests && (
-        <div className="mt-4 text-xl font-semibold animate-pulse text-blue-400">
-             Running Tests...
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-5 shadow-xl shadow-black/20">
+            <h3 className="text-xl font-bold mb-3">Bugged Code</h3>
+            <CodeMirror
+              value={problem.code_with_bug}
+              height="350px"
+              theme="dark"
+              readOnly={true}
+              extensions={[getLanguageExtension(problem.language)]}
+            />
+          </div>
+
+          <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-5 shadow-xl shadow-black/20">
+            <h3 className="text-xl font-bold mb-3">Your Fix</h3>
+            <CodeMirror
+              value={userCode}
+              height="350px"
+              theme="dark"
+              extensions={[problem.language === "python" ? python() : javascript()]}
+              onChange={(val) => setUserCode(val)}
+            />
+          </div>
         </div>
+
+        <div className="mt-6 flex flex-wrap items-center gap-4">
+          <button
+            onClick={submitSolution}
+            className="px-8 py-3 rounded-2xl font-bold bg-gradient-to-r from-blue-500 to-cyan-400 hover:opacity-90 transition shadow-lg shadow-cyan-500/20"
+          >
+            Submit
+          </button>
+
+          {feedback && <p className="text-xl font-semibold">{feedback}</p>}
+
+          {runningTests && (
+            <div className="text-lg font-semibold animate-pulse text-cyan-300">Running Tests...</div>
+          )}
+        </div>
+
+        {feedback === "✔ Correct! Score updated." && (
+          <button
+            onClick={loadNextProblem}
+            className="mt-6 px-8 py-3 rounded-2xl font-bold bg-green-500/90 hover:bg-green-500 transition shadow-lg shadow-green-500/20"
+          >
+            Next Problem
+          </button>
         )}
-
-
-      {/* Next Problem */}
-      {feedback === "✔ Correct! Score updated." && (
-        <button
-          onClick={loadNextProblem}
-          className="mt-5 px-8 py-3 rounded-lg font-bold bg-green-600 hover:bg-green-700 transition shadow-xl"
-        >
-          Next Problem
-        </button>
-      )}
+      </main>
     </div>
   );
 }

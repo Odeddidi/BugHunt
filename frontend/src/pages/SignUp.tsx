@@ -56,54 +56,53 @@ export default function SignUp() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden text-white px-4"
     >
-      {/* רקע מטושטש כמו ב-Hero */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1518773553398-650c184e0bb3?q=80&w=1200&auto=format')",
-        }}
-      />
+      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-gray-950 via-gray-900 to-slate-900" />
+      <div className="fixed inset-0 -z-10 opacity-60">
+        <div className="absolute -top-24 -left-24 h-72 w-72 rounded-full bg-cyan-500/20 blur-3xl" />
+        <div className="absolute top-24 -right-24 h-80 w-80 rounded-full bg-purple-500/20 blur-3xl" />
+        <div className="absolute bottom-[-6rem] left-1/3 h-72 w-72 rounded-full bg-blue-500/10 blur-3xl" />
+      </div>
 
-      {/* שכבת השחרה + טשטוש */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-
-      {/* תוכן */}
-      <div className="relative bg-black/40 backdrop-blur-xl p-10 rounded-2xl shadow-2xl w-96 border border-white/10">
+      <div className="relative w-full max-w-md bg-white/5 backdrop-blur-xl p-8 rounded-3xl shadow-2xl shadow-black/30 border border-white/10">
+        <div className="flex items-center justify-center gap-3">
+          <img src="/oded-2.svg" alt="BugHub Logo" className="h-8 w-8" />
+          <span className="text-white font-semibold tracking-wide">BugHub</span>
+        </div>
         
-        <h1 className="text-3xl font-bold text-white text-center mb-6">
-          Create Account
-        </h1>
+        <h1 className="mt-6 text-3xl font-bold text-center">Create Account</h1>
+        <p className="mt-2 text-center text-gray-300 text-sm">Create your account to start playing.</p>
 
         {error && (
-          <div className="mb-4 text-red-400 text-center text-sm">{error}</div>
+          <div className="mt-5 bg-red-500/10 text-red-200 p-3 rounded-2xl border border-red-500/20 text-sm text-center">
+            {error}
+          </div>
         )}
 
-        <form onSubmit={handleSubmit}>
-          <label className="text-white block mb-1">Email</label>
+        <form onSubmit={handleSubmit} className="mt-6">
+          <label className="text-gray-200 block mb-1">Email</label>
           <input
             type="email"
-            className="w-full p-2 mb-4 rounded bg-white/10 text-white border border-white/20 focus:border-cyan-400 outline-none"
+            className="w-full p-3 mb-4 rounded-2xl bg-white/10 text-white border border-white/20 focus:border-cyan-400 outline-none"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
 
-          <label className="text-white block mb-1">Username</label>
+          <label className="text-gray-200 block mb-1">Username</label>
           <input
             type="text"
-            className="w-full p-2 mb-4 rounded bg-white/10 text-white border border-white/20 focus:border-cyan-400 outline-none"
+            className="w-full p-3 mb-4 rounded-2xl bg-white/10 text-white border border-white/20 focus:border-cyan-400 outline-none"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
 
-          <label className="text-white block mb-1">Password</label>
+          <label className="text-gray-200 block mb-1">Password</label>
           <input
             type="password"
-            className="w-full p-2 mb-6 rounded bg-white/10 text-white border border-white/20 focus:border-cyan-400 outline-none"
+            className="w-full p-3 mb-6 rounded-2xl bg-white/10 text-white border border-white/20 focus:border-cyan-400 outline-none"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -111,17 +110,16 @@ export default function SignUp() {
 
           <button
             type="submit"
-            className="w-full py-2 rounded-lg bg-blue-500 text-white font-bold 
-                       shadow-[0_0_10px_#22d3ee] hover:bg-blue-600 transition"
+            className="w-full py-3 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-bold hover:opacity-90 transition shadow-lg shadow-cyan-500/20"
           >
             {loading ? "Loading..." : "Sign Up"}
           </button>
         </form>
 
-        <p className="text-gray-300 mt-4 text-center text-sm">
+        <p className="text-gray-300 mt-5 text-center text-sm">
           Already have an account?{" "}
           <span
-            className="text-blue-400 cursor-pointer hover:underline"
+            className="text-cyan-400 cursor-pointer hover:underline"
             onClick={() => navigate("/login")}
           >
             Login

@@ -86,110 +86,134 @@ export default function AddProblem() {
   }
 
   return (
-    <div className="bg-white p-6 border rounded shadow max-w-4xl">
-      <h2 className="text-2xl font-semibold mb-4">Add New Problem</h2>
+    <div className="max-w-4xl">
+      <h2 className="text-2xl font-semibold text-white">Add New Problem</h2>
+      <p className="mt-2 text-gray-300">Create a new challenge for players.</p>
 
-      {/* TITLE */}
-      <input
-        className="border p-2 w-full mb-4"
-        placeholder="Problem title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      {/* DESCRIPTION */}
-      <textarea
-        className="border p-2 w-full mb-4"
-        placeholder="Problem description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
+      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="md:col-span-2">
+          <label className="text-sm text-gray-200">Title</label>
+          <input
+            className="mt-2 w-full p-3 rounded-2xl bg-white/10 text-white border border-white/20 focus:border-cyan-400 outline-none"
+            placeholder="Problem title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
 
-      {/* LANGUAGE */}
-      <select
-        className="border p-2 w-full mb-4"
-        value={language}
-        onChange={(e) => setLanguage(e.target.value)}
-      >
+        <div className="md:col-span-2">
+          <label className="text-sm text-gray-200">Description</label>
+          <textarea
+            className="mt-2 w-full p-3 rounded-2xl bg-white/10 text-white border border-white/20 focus:border-cyan-400 outline-none min-h-[120px]"
+            placeholder="Problem description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <label className="text-sm text-gray-200">Language</label>
+          <select
+            className="mt-2 w-full p-3 rounded-2xl bg-white/10 text-white border border-white/20 focus:border-cyan-400 outline-none"
+            value={language}
+            onChange={(e) => setLanguage(e.target.value)}
+          >
         <option value="python">Python</option>
         <option value="javascript">JavaScript</option>
         <option value="typescript">TypeScript</option>
         <option value="c">C</option>
         <option value="cpp">C++</option>
         <option value="java">Java</option>
-      </select>
+          </select>
+        </div>
 
-      {/* DIFFICULTY */}
-      <select
-        className="border p-2 w-full mb-4"
-        value={difficulty}
-        onChange={(e) => setDifficulty(e.target.value)}
-      >
+        <div>
+          <label className="text-sm text-gray-200">Difficulty</label>
+          <select
+            className="mt-2 w-full p-3 rounded-2xl bg-white/10 text-white border border-white/20 focus:border-cyan-400 outline-none"
+            value={difficulty}
+            onChange={(e) => setDifficulty(e.target.value)}
+          >
         <option value="easy">Easy</option>
         <option value="medium">Medium</option>
         <option value="hard">Hard</option>
-      </select>
+          </select>
+        </div>
+      </div>
 
-      {/* BUGGED CODE */}
-      <h3 className="font-semibold mb-2">Bugged Code</h3>
-      <CodeMirror
-        value={bugCode}
-        height="200px"
-        extensions={[getLanguageExtension(language)]}
-        onChange={(v) => setBugCode(v)}
-        className="mb-6 border rounded"
-      />
-
-      {/* FIXED CODE */}
-      <h3 className="font-semibold mb-2">Fixed Code</h3>
-      <CodeMirror
-        value={fixedCode}
-        height="200px"
-        extensions={[getLanguageExtension(language)]}
-        onChange={(v) => setFixedCode(v)}
-        className="mb-6 border rounded"
-      />
-
-      {/* TESTS */}
-      <h3 className="font-semibold mt-4 mb-2">Tests</h3>
-
-      {tests.map((test, i) => (
-        <div key={i} className="flex gap-2 mb-3">
-          <textarea
-            className="border p-2 flex-1"
-            placeholder="Input (optional)"
-            value={test.input}
-            onChange={(e) => updateTest(i, "input", e.target.value)}
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-4">
+          <h3 className="font-semibold text-white mb-2">Bugged Code</h3>
+          <CodeMirror
+            value={bugCode}
+            height="220px"
+            theme="dark"
+            extensions={[getLanguageExtension(language)]}
+            onChange={(v) => setBugCode(v)}
+            className="overflow-hidden rounded-2xl border border-white/10"
           />
+        </div>
 
-          <input
-            className="border p-2 flex-1"
-            placeholder="Expected Output"
-            value={test.expected_output}
-            onChange={(e) => updateTest(i, "expected_output", e.target.value)}
+        <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-4">
+          <h3 className="font-semibold text-white mb-2">Fixed Code</h3>
+          <CodeMirror
+            value={fixedCode}
+            height="220px"
+            theme="dark"
+            extensions={[getLanguageExtension(language)]}
+            onChange={(v) => setFixedCode(v)}
+            className="overflow-hidden rounded-2xl border border-white/10"
           />
+        </div>
+      </div>
+
+      <div className="mt-8">
+        <h3 className="font-semibold text-white">Tests</h3>
+        <p className="mt-1 text-sm text-gray-300">Add input/output cases used for validation.</p>
+
+        <div className="mt-4 space-y-3">
+          {tests.map((test, i) => (
+            <div key={i} className="flex flex-col md:flex-row gap-3">
+              <textarea
+                className="p-3 rounded-2xl bg-white/10 text-white border border-white/20 focus:border-cyan-400 outline-none flex-1 min-h-[52px]"
+                placeholder="Input (optional)"
+                value={test.input}
+                onChange={(e) => updateTest(i, "input", e.target.value)}
+              />
+
+              <input
+                className="p-3 rounded-2xl bg-white/10 text-white border border-white/20 focus:border-cyan-400 outline-none flex-1"
+                placeholder="Expected Output"
+                value={test.expected_output}
+                onChange={(e) => updateTest(i, "expected_output", e.target.value)}
+              />
+
+              <button
+                className="px-4 py-3 rounded-2xl bg-white/10 border border-white/15 text-white font-semibold hover:bg-white/15 transition"
+                onClick={() => removeTest(i)}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-4 flex flex-wrap gap-3">
+          <button
+            className="px-4 py-2 rounded-2xl bg-white/10 border border-white/15 text-white font-semibold hover:bg-white/15 transition"
+            onClick={addTest}
+          >
+            + Add Test
+          </button>
 
           <button
-            className="bg-red-500 text-white px-2 rounded"
-            onClick={() => removeTest(i)}
+            className="px-5 py-2 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-bold hover:opacity-90 transition shadow-lg shadow-cyan-500/20"
+            onClick={submit}
           >
-            X
+            Add Problem
           </button>
         </div>
-      ))}
-
-      <button
-        className="bg-gray-600 text-white px-3 py-1 rounded mb-6"
-        onClick={addTest}
-      >
-        + Add Test
-      </button>
-
-      <button
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-        onClick={submit}
-      >
-        Add Problem
-      </button>
+      </div>
     </div>
   );
 }

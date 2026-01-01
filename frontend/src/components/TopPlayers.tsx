@@ -13,34 +13,33 @@ export default function TopPlayers() {
   }, []);
 
   return (
-    <div className="bg-[#1e293b]/60 p-8 rounded-2xl shadow-xl border border-white/10 backdrop-blur-md">
-
-      <h2 className="text-3xl mb-6 font-bold text-white flex items-center gap-3">
+    <div className="p-6">
+      <h2 className="text-2xl md:text-3xl font-bold text-white flex items-center gap-3">
         🏆 Top 10 Players
       </h2>
+      <p className="mt-2 text-gray-300 text-sm">Live leaderboard.</p>
 
-      <table className="min-w-full">
-        <thead>
-          <tr className="text-gray-300 border-b border-white/10">
-            <th className="py-3 text-left">Rank</th>
-            <th className="py-3 text-left">Username</th>
-            <th className="py-3 text-left">Score</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {players.map((p: any, index: number) => (
-            <tr
-              key={p.username}
-              className="border-b border-white/10 hover:bg-white/10 transition"
-            >
-              <td className="py-3 text-white font-semibold">{index + 1}</td>
-              <td className="py-3 text-white">{p.username}</td>
-              <td className="py-3 text-white">{p.score}</td>
+      <div className="mt-5 overflow-hidden rounded-2xl border border-white/10">
+        <table className="min-w-full">
+          <thead className="bg-white/5">
+            <tr className="text-gray-200 border-b border-white/10">
+              <th className="py-3 px-4 text-left">Rank</th>
+              <th className="py-3 px-4 text-left">Username</th>
+              <th className="py-3 px-4 text-left">Score</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {players.map((p: any, index: number) => (
+              <tr key={p.username} className="border-b border-white/10 hover:bg-white/10 transition">
+                <td className="py-3 px-4 text-white font-semibold">{index + 1}</td>
+                <td className="py-3 px-4 text-white">{p.username}</td>
+                <td className="py-3 px-4 text-white">{p.score}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
