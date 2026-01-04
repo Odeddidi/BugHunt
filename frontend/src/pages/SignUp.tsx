@@ -68,7 +68,7 @@ export default function SignUp() {
       <div className="relative w-full max-w-md bg-white/5 backdrop-blur-xl p-8 rounded-3xl shadow-2xl shadow-black/30 border border-white/10">
         <div className="flex items-center justify-center gap-3">
           <img src="/oded-2.svg" alt="BugHub Logo" className="h-8 w-8" />
-          <span className="text-white font-semibold tracking-wide">BugHub</span>
+          <span className="text-white font-semibold tracking-wide">BugHunt</span>
         </div>
         
         <h1 className="mt-6 text-3xl font-bold text-center">Create Account</h1>

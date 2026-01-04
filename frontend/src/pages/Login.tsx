@@ -55,7 +55,7 @@ export default function Login({setIsLogged}: {setIsLogged: (val: boolean) => voi
       <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl p-8 shadow-2xl shadow-black/30">
         <div className="flex items-center justify-center gap-3">
           <img src="/oded-2.svg" alt="BugHub Logo" className="h-8 w-8" />
-          <span className="text-white font-semibold tracking-wide">BugHub</span>
+          <span className="text-white font-semibold tracking-wide">BugHunt</span>
         </div>
 
         <h1 className="mt-6 text-3xl font-bold text-center">Welcome Back</h1>
