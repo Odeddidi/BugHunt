@@ -5,7 +5,7 @@ PISTON_URL = "https://emkc.org/api/v2/piston/execute"
 async def run_code(language: str, code: str, stdin: str):
     payload = {
         "language": language,
-        "version": "*",   # לוקח את גרסת השפה האחרונה
+        "version": "*",  
         "files": [
             {"name": "main", "content": code}
         ],

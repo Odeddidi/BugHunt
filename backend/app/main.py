@@ -12,20 +12,14 @@ from app.routers.test_piston import router as test_piston_router
 
 
 
-
-
-
-
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # או ["http://localhost:5173"]
-    allow_credentials=True,
-    allow_methods=["*"],  # חשוב!!!
-    allow_headers=["*"],  # חשוב!!!
+    allow_origins=["*"],  
+    allow_methods=["*"],  
+    allow_headers=["*"], 
 )
 
-# יוצר את כל הטבלאות
 Base.metadata.create_all(bind=engine)
 app.include_router(auth.router)
 app.include_router(problems_router)

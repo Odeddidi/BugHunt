@@ -32,14 +32,13 @@ def create_private_room(
 ):
     room = Room(
         status="waiting",
-        invite_code=str(uuid.uuid4())[:8]  # קוד קצר להזמנה
+        invite_code=str(uuid.uuid4())[:8]
     )
 
     db.add(room)
     db.commit()
     db.refresh(room)
 
-    # כותבים אותו כשחקן ראשון
     player = RoomPlayer(room_id=room.id, user_id=user.id)
     db.add(player)
     db.commit()
@@ -61,12 +60,10 @@ def join_via_invite(
     if not room:
         raise HTTPException(404, "Invalid invite code")
 
-    # בדיקה אם יש כבר שני שחקנים
     count = db.query(RoomPlayer).filter(RoomPlayer.room_id == room.id).count()
     if count >= 2:
         raise HTTPException(400, "Room is full")
 
-    # בדיקה אם השחקן כבר בפנים
     exists = db.query(RoomPlayer).filter(
         and_(RoomPlayer.user_id == user.id, RoomPlayer.room_id == room.id)
     ).first()
@@ -78,7 +75,6 @@ def join_via_invite(
     db.add(player)
     db.commit()
 
-    # כשיש שניים — עוברים לשחק
     if count + 1 == 2:
         room.status = "playing"
         db.commit()
@@ -99,7 +95,7 @@ def find_match(
     print("==============================")
 
     # ---------------------------------------------------
-    # (A) ניקוי חדרים ריקים לפני כל פעולה
+    # clean empty rooms
     # ---------------------------------------------------
     empty_rooms = (
         db.query(Room)
@@ -117,19 +113,15 @@ def find_match(
     for r in empty_rooms:
         print(f"[CLEAN] Removing empty room {r.id}")
 
-        # מחיקת ה-ActiveProblems
+        
         db.query(ActiveProblem).filter(ActiveProblem.room_id == r.id).delete()
-
-        # מחיקת players
         db.query(RoomPlayer).filter(RoomPlayer.room_id == r.id).delete()
-
-        # מחיקת החדר עצמו
         db.delete(r)
 
     db.commit()
 
     # ---------------------------------------------------
-    # (B) בדיקת האם המשתמש כבר בחדר תקין
+    # (B) check if user already in a room
     # ---------------------------------------------------
     existing = (
         db.query(RoomPlayer)
@@ -149,7 +141,7 @@ def find_match(
         }
 
     # ---------------------------------------------------
-    # (C) מציאת חדר שמחכה לשחקן שני
+    # (C) find waiting room with 1 player
     # ---------------------------------------------------
     waiting_room = (
         db.query(Room)
@@ -180,7 +172,7 @@ def find_match(
         }
 
     # ---------------------------------------------------
-    # (D) יצירת חדר חדש
+    # (D) create new room
     # ---------------------------------------------------
     print(f"[NEW] No available room → creating new room for user {user.id}")
 

@@ -10,9 +10,9 @@ class Room(Base):
     id = Column(Integer, primary_key=True, index=True)
     
     status = Column(String, default="waiting")  
-    # waiting – מחכים לשחקן שני
-    # playing – משחק פעיל
-    # finished – המשחק הסתיים
+    # waiting – wait for other player
+    # playing 
+    # finished
 
     invite_code = Column(String, unique=True, nullable=True)
     current_round = Column(Integer, default=0)

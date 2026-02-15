@@ -23,7 +23,6 @@ def get_db():
 
 @router.post("/", response_model=ProblemResponse)
 def create_problem(problem: ProblemCreate, db: Session = Depends(get_db)):
-    # צור את הבעיה עצמה
     p = Problem(
         title=problem.title,
         description=problem.description,
@@ -36,7 +35,6 @@ def create_problem(problem: ProblemCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(p)
 
-    # צור את הטסטים
     for t in problem.tests:
         test_row = ProblemTest(
             problem_id=p.id,
@@ -57,7 +55,6 @@ def get_random_problem(difficulty: str | None = None,
 
     query = db.query(Problem)
 
-    # אם difficulty לא None ולא ""
     if difficulty:
         problems = query.filter(Problem.difficulty == difficulty).all()
     else:
@@ -77,7 +74,6 @@ async def submit_solution(req: SubmitRequest,
     if not problem:
         raise HTTPException(404, "Problem not found")
 
-    # בדיקה אמיתית מול Piston
     is_correct, out, expected, stderr = await verify_solution(req.solution, problem)
 
     return {

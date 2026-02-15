@@ -4,7 +4,7 @@ from app.config import DATABASE_URL
 
 engine = create_engine(
     DATABASE_URL,
-    pool_pre_ping=True,  # שומר על חיבורים תקינים
+    pool_pre_ping=True, 
 )
 
 SessionLocal = sessionmaker(

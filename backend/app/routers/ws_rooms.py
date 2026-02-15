@@ -73,7 +73,6 @@ def get_db():
 # Start new round
 # ====================================================
 def start_new_round(db: Session, room: Room):
-    # שליפת שני השחקנים
     players = db.query(RoomPlayer).filter(
         RoomPlayer.room_id == room.id
     ).all()
@@ -85,7 +84,6 @@ def start_new_round(db: Session, room: Room):
     p1_id = p1.user_id
     p2_id = p2.user_id
 
-    # אילו שאלות השחקנים כבר ראו
     seen_p1 = db.query(UserSeenProblem.problem_id).filter(
         UserSeenProblem.user_id == p1_id
     )
@@ -94,21 +92,17 @@ def start_new_round(db: Session, room: Room):
         UserSeenProblem.user_id == p2_id
     )
 
-    # סינון: בעיות שאף אחד מהם לא ראה
     available_problems = db.query(Problem).filter(
         Problem.id.not_in(seen_p1),
         Problem.id.not_in(seen_p2)
     ).all()
 
-    # אם אין בעיות חדשות → fallback: אפשר להחזיר את כל הבעיות מחדש
     if not available_problems:
         print("[ROUND] no new problems available for both players, resetting seen problems.")
         available_problems = db.query(Problem).all()
 
-    # בחר בעיה
     problem = random.choice(available_problems)
 
-    # עדכון ActiveProblem
     active = ActiveProblem(
         room_id=room.id,
         problem_id=problem.id,
@@ -120,7 +114,6 @@ def start_new_round(db: Session, room: Room):
 
     db.add(active)
 
-    # סימון שהבעיה נראתה על ידי שני השחקנים
     for rp in players:
         exists = db.query(UserSeenProblem).filter_by(
             user_id=rp.user_id,
@@ -143,7 +136,7 @@ def normalize(code: str):
         tree = ast.parse(code)
         return ast.dump(tree, annotate_fields=False, include_attributes=False)
     except Exception:
-        return None  # קוד לא תקין – אי אפשר לפרסר
+        return None  
 
 
 # ====================================================

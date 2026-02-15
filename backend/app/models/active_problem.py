@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
-from app.database import Base  # שים לב לנתיב הנכון!
+from app.database import Base 
 
 class ActiveProblem(Base):
     __tablename__ = "active_problems"
